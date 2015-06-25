@@ -45,9 +45,8 @@ public class GmailTab {
        * [Gmail]/Trash      Messages deleted from Gmail.
        */
             folder.open(Folder.READ_WRITE);
-            Message messages[] = folder.getMessages();
+             messages = folder.getMessages();
 
-            System.out.println("Connected to gmail");
 
 
         }catch (Exception ex){
@@ -72,10 +71,11 @@ public class GmailTab {
     }
 
 
-    public DefaultListModel getAddresses() {
+    public  DefaultListModel getAddresses() {
 
 
         DefaultListModel dm = new DefaultListModel();
+
 
 
         try {
@@ -108,7 +108,7 @@ public class GmailTab {
 
 
         } catch (MessagingException ex) {
-
+            System.out.println("Exception at getAddresses method:" + ex);
         }
 
 
