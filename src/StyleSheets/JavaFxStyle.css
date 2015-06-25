@@ -1,0 +1,25 @@
+.vbox {
+
+-fx-background-color: darkseagreen;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+
+
+
+}
+
+.backGround {
+
+    -fx-background-color: black;
+
+
+
+}
+
+
+.label {
+
+    -fx-text-fill: white ;
+
+}

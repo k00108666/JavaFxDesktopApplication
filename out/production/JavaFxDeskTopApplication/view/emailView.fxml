@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea layoutX="8.0" layoutY="146.0" prefHeight="190.0" prefWidth="589.0" />
+      <Button layoutX="14.0" layoutY="349.0" mnemonicParsing="false" text="Reply" />
+      <Button layoutX="102.0" layoutY="349.0" mnemonicParsing="false" text="Forward" />
+      <Label layoutX="21.0" layoutY="14.0" text="From:" />
+      <Label layoutX="20.0" layoutY="56.0" text="To:" />
+      <Label layoutX="20.0" layoutY="95.0" text="Subject:" />
+      <TextField layoutX="79.0" layoutY="9.0" />
+      <TextField layoutX="79.0" layoutY="51.0" />
+      <TextField layoutX="79.0" layoutY="90.0" />
+   </children>
+</AnchorPane>
