@@ -5,13 +5,12 @@ package Controller.Tabs;
  */
 
 
-import java.io.*;
+
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.swing.DefaultListModel;
+
 
 public class GmailTab {
 
@@ -24,10 +23,10 @@ public class GmailTab {
 
 
 
-
     public final void doConnect() {
 
         try{
+            //Connect to gmail, You can se your protocall here i.e Pop, Imap etc
             Properties props = System.getProperties();
             props.setProperty("mail.store.protocol", "imaps");
 
@@ -45,9 +44,7 @@ public class GmailTab {
        * [Gmail]/Trash      Messages deleted from Gmail.
        */
             folder.open(Folder.READ_WRITE);
-             messages = folder.getMessages();
-
-
+           Message  messages [] = folder.getMessages();
 
         }catch (Exception ex){
 
@@ -58,17 +55,6 @@ public class GmailTab {
     }
 
 
-    public static void GetEmails(){
-
-
-        GmailTab gmail = new GmailTab();
-        gmail.doConnect();
-
-
-
-
-
-    }
 
 
     public  DefaultListModel getAddresses() {
@@ -79,14 +65,11 @@ public class GmailTab {
 
 
         try {
-            GmailTab gmail = new GmailTab();
-            folder = gmail.folder;
-
+            //Connect and extract emails
+            this.doConnect();
             messages = folder.getMessages();
 
-
-
-
+            //add each email to the DefaultListModel
             for (int x = 0 ; x < numOfEmails; x++){
 
 
@@ -97,12 +80,7 @@ public class GmailTab {
                 String email = froms == null ? null : ((InternetAddress) froms[0]).getAddress();
                 Object emailOb = email;
 
-
-
                 dm.addElement(emailOb);
-
-
-
 
             }
 
@@ -123,13 +101,6 @@ public class GmailTab {
 
 
         try {
-
-
-
-
-
-
-
 
             for (int x = 0 ; x < numOfEmails; x++){
 
