@@ -6,6 +6,8 @@ package Controller.Tabs;
 
 
 
+import application.Main;
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -33,7 +35,7 @@ public class GmailTab {
             Session session = Session.getDefaultInstance(props, null);
             session.setDebug(true);
             store = session.getStore("imaps");
-            store.connect("imap.gmail.com","seamo123@gmail.com", "01063504983");
+            store.connect("imap.gmail.com", Main.username, Main.password);
             folder = store.getFolder("Inbox");
       /* Others GMail folders :
        * [Gmail]/All Mail   This folder contains all of your Gmail messages.

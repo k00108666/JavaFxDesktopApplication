@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -13,7 +14,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="GmailListView" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="GmailListView" disable="true" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <PasswordField fx:id="passPassword" layoutX="108.0" layoutY="76.0" prefHeight="31.0" prefWidth="144.0" promptText="*************" />
+                        <TextField fx:id="userTxtField" layoutX="108.0" layoutY="30.0" prefHeight="31.0" prefWidth="144.0" promptText="example@gmail.com" />
+                        <Label fx:id="lblUser" layoutX="14.0" layoutY="35.0" text="Username:" />
+                        <Label fx:id="lblPass" layoutX="14.0" layoutY="81.0" text="Password:" />
+                        <Button fx:id="btnGMailLogin" layoutX="108.0" layoutY="155.0" mnemonicParsing="false" text="Login" />
                      </children>
                   </AnchorPane>
             </content>
