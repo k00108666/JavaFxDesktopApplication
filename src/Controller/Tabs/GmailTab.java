@@ -16,7 +16,7 @@ public class GmailTab {
 
     public  Folder folder;
     public Store store;
-    public  Message messages[];
+    public static   Message messages[];
     public static int numOfEmails = 10;
     public static int emailId = 1;
 
@@ -44,7 +44,7 @@ public class GmailTab {
        * [Gmail]/Trash      Messages deleted from Gmail.
        */
             folder.open(Folder.READ_WRITE);
-           Message  messages [] = folder.getMessages();
+             messages = folder.getMessages();
 
         }catch (Exception ex){
 
@@ -67,7 +67,7 @@ public class GmailTab {
         try {
             //Connect and extract emails
             this.doConnect();
-            messages = folder.getMessages();
+
 
             //add each email to the DefaultListModel
             for (int x = 0 ; x < numOfEmails; x++){

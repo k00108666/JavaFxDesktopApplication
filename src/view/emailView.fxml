@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<AnchorPane fx:id="emailViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Email">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextArea layoutX="8.0" layoutY="146.0" prefHeight="190.0" prefWidth="589.0" />
-      <Button layoutX="14.0" layoutY="349.0" mnemonicParsing="false" text="Reply" />
-      <Button layoutX="102.0" layoutY="349.0" mnemonicParsing="false" text="Forward" />
+      <TextArea fx:id="emailText" layoutX="8.0" layoutY="146.0" prefHeight="190.0" prefWidth="589.0" />
+      <Button fx:id="sendBtn" disable="true" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" text="Send" />
       <Label layoutX="21.0" layoutY="14.0" text="From:" />
       <Label layoutX="20.0" layoutY="56.0" text="To:" />
       <Label layoutX="20.0" layoutY="95.0" text="Subject:" />
-      <TextField layoutX="79.0" layoutY="9.0" />
-      <TextField layoutX="79.0" layoutY="51.0" />
-      <TextField layoutX="79.0" layoutY="90.0" />
+      <TextField fx:id="fromTxtField" layoutX="79.0" layoutY="9.0" />
+      <TextField fx:id="toTextField" disable="true" layoutX="79.0" layoutY="51.0" />
+      <TextField fx:id="subjectTxtField" layoutX="79.0" layoutY="90.0" />
+      <RadioButton fx:id="replyTgl" layoutX="303.0" layoutY="14.0" mnemonicParsing="false" text="Reply">
+         <toggleGroup>
+            <ToggleGroup fx:id="options" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="forwardTgl" layoutX="303.0" layoutY="56.0" mnemonicParsing="false" text="Forward" toggleGroup="$options" />
+      <Label fx:id="lblAttachment" layoutX="155.0" layoutY="365.0" text="No attachment" textFill="#0a44f2" />
+      <Label fx:id="lblAddAttach" layoutX="155.0" layoutY="365.0" text="Add file" textFill="#0a44f2" visible="false" />
    </children>
 </AnchorPane>

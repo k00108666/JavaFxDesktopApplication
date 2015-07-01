@@ -70,5 +70,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="activation" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../Programming/API's/javamail-1.4.5/activation.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
