@@ -209,8 +209,8 @@ public class EmailControls {
         String emailBody = " ";
             String file_name = " ";
 
-            final String username = "seamo123@gmail.com";
-            final String password = "01063504983";
+            final String username = Main.username;
+            final String password = Main.password;
 
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         // Get a Properties object
