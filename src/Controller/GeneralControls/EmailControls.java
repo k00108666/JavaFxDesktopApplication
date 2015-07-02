@@ -80,7 +80,17 @@ public class EmailControls {
                             Document doc = Jsoup.parseBodyFragment(html);
                             Element body = doc.body();
 
-                            parsedEmail = body.text().toString();
+
+                            String s = (String) body.text();
+                            StringBuilder sb = new StringBuilder(s);
+
+                            int x = 0;
+                            while ((x = sb.indexOf(" ", x + 75)) != -1)
+                                sb.replace(x, x + 1, "\n");
+
+                            parsedEmail = sb.toString();
+
+
                         }
 
 
@@ -110,7 +120,15 @@ public class EmailControls {
                     }
                 }  else if (contentType.contains("text/plain")) {
                     // some other bodypart...
-                    parsedEmail =((String) message.getContent());
+                    String s = (String) message.getContent();
+                    StringBuilder sb = new StringBuilder(s);
+
+                    int i = 0;
+                    while ((i = sb.indexOf(" ", i + 30)) != -1)
+                        sb.replace(i, i + 1, "\n");
+
+                    parsedEmail = sb.toString();
+
                 }
 
 
@@ -184,7 +202,9 @@ public class EmailControls {
     public void addAttachment() {
     }
 
-    public void sendEmail() {
+    public static boolean  sendEmail() {
+
+        Boolean answer = false;
 
         String emailBody = " ";
             String file_name = " ";
@@ -231,7 +251,7 @@ public class EmailControls {
 
 
 
-
+                answer = true;
 
                     AlertBox.display("Message", "Your message has been sent!");
 
@@ -241,6 +261,7 @@ public class EmailControls {
             }
 
 
+        return answer;
     }
 
     private static void addAttachment(Multipart multipart, String filename)

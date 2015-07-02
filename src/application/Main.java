@@ -3,7 +3,10 @@ package application;
 
 import Controller.GeneralControls.AlertBox;
 import Controller.Tabs.GmailTab;
+import Controller.Tabs.MySmackDemo;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +33,9 @@ public class Main extends Application {
     Label GMailLabelPass;
     PasswordField GMailPass;
     TextField GMailTxtField;
+    TextField TxtEmailNum;
+    Label LblEmailNum;
+    TextArea GchatText;
 
 
 
@@ -45,8 +51,40 @@ public class Main extends Application {
         GMailLabelPass = (Label) root.lookup("#lblPass");
         GMailPass = (PasswordField) root.lookup("#passPassword");
         GMailTxtField = (TextField) root.lookup("#userTxtField");
+        TxtEmailNum = (TextField)  root.lookup("#txtEmailNum");
+        LblEmailNum = (Label) root.lookup("#lblEmailNum");
+        GchatText = (TextArea) root.lookup("#txtAreaGchat");
 
 
+
+
+
+        TxtEmailNum.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               try{ GmailTab.numOfEmails = Integer.parseInt(TxtEmailNum.getText());}
+               catch (Exception ex)  {
+
+                   AlertBox.display("Error", "Value must be an Integer");
+                   TxtEmailNum.setText("10");
+
+               }
+
+            }
+        });
+
+
+
+
+
+        GchatText.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                MySmackDemo smack = new MySmackDemo();
+
+            }
+        });
 
 
 
@@ -76,6 +114,8 @@ public class Main extends Application {
                     GMailLabelPass.setVisible(false);
                     GMailPass.setVisible(false);
                     GMailTxtField.setVisible(false);
+                    LblEmailNum.setVisible(false);
+                    TxtEmailNum.setVisible(false);
 
 
 

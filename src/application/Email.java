@@ -1,6 +1,7 @@
 package application;
 
 import Controller.GeneralControls.EmailControls;
+import Controller.GeneralControls.WindowControls;
 import Controller.Tabs.GmailTab;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -138,10 +139,12 @@ public class Email {
 
 
 
+                boolean answer = email.sendEmail();
 
 
-
-                    email.sendEmail();
+                    if (answer = true){
+                        clearWindow();
+                   windows.closeWindow();}
                 }
             });
 

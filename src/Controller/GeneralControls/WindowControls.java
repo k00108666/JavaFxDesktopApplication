@@ -40,6 +40,6 @@ public class WindowControls {
 
     public void closeWindow() {
 
-
+            stage.close();
     }
 }

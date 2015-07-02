@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="emailViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+<AnchorPane fx:id="emailViewPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
 
     <children>
       <TabPane layoutX="14.0" layoutY="7.0" prefHeight="486.0" prefWidth="266.0" tabClosingPolicy="UNAVAILABLE">
@@ -20,6 +20,8 @@
                         <Label fx:id="lblUser" layoutX="14.0" layoutY="35.0" text="Username:" />
                         <Label fx:id="lblPass" layoutX="14.0" layoutY="81.0" text="Password:" />
                         <Button fx:id="btnGMailLogin" layoutX="108.0" layoutY="155.0" mnemonicParsing="false" text="Login" />
+                        <TextField fx:id="txtEmailNum" layoutX="108.0" layoutY="118.0" prefHeight="31.0" prefWidth="43.0" text="10" />
+                        <Label fx:id="lblEmailNum" layoutX="9.0" layoutY="123.0" text="Email Num:" />
                      </children>
                   </AnchorPane>
             </content>
@@ -34,6 +36,28 @@
             </content>
           </Tab>
         </tabs>
+      </TabPane>
+      <TabPane layoutX="634.0" layoutY="7.0" prefHeight="486.0" prefWidth="266.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="gChatTab" text="GChat">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="txtAreaGchat" prefHeight="448.0" prefWidth="266.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="facebookTab1" text="FaceBook Feed">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="FaceBookListView1" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
       </TabPane>
    </children>
 </AnchorPane>

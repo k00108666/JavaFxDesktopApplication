@@ -25,6 +25,7 @@ public class GmailTab {
 
 
 
+
     public final void doConnect() {
 
         try{
@@ -140,15 +141,6 @@ public class GmailTab {
     }
 
 
-    public Message getMessage () {
-
-        int messageLocation = messages.length - emailId;
-        return messages[messageLocation];
-
-
-
-
-    }
 
 
 
