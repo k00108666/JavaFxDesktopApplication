@@ -43,8 +43,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="txtAreaGchat" layoutX="-2.0" layoutY="34.0" prefHeight="298.0" prefWidth="274.0" />
-                        <TextArea fx:id="textAreaGchatInput" layoutY="340.0" prefHeight="107.0" prefWidth="266.0" />
+                        <TextArea fx:id="txtAreaGchat" editable="false" layoutX="-2.0" layoutY="34.0" prefHeight="298.0" prefWidth="274.0" />
+                        <TextArea fx:id="textAreaGchatInput" editable="false" layoutY="340.0" prefHeight="107.0" prefWidth="266.0" />
                         <ComboBox fx:id="cmbGchat" layoutY="3.0" prefHeight="31.0" prefWidth="266.0" />
                      </children>
                   </AnchorPane>

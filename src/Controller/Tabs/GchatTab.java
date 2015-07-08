@@ -14,7 +14,7 @@ import java.util.List;
 
 
 
-public class GChatTab implements MessageListener {
+public class GChatTab  {
 
     public static String id = "";
     static ConnectionConfiguration config;
@@ -26,8 +26,8 @@ public class GChatTab implements MessageListener {
 
     ChatManager chatManager;
     MessageListener messageListener;
-    public List<String> userList=new ArrayList<>();
-    public List<String> nameList = new ArrayList<>();
+    public static List<String> userList=new ArrayList<>();
+    public static List<String> nameList = new ArrayList<>();
 
 
 
@@ -59,19 +59,14 @@ public class GChatTab implements MessageListener {
 
 
             chatManager = connection.getChatManager();
+            messageListener = new chatListener();
 
             connection.getChatManager().addChatListener(new ChatManagerListener() {
                 @Override
                 public void chatCreated(Chat chat, boolean b) {
 
 
-                    chat.addMessageListener(new MessageListener() {
-                        @Override
-                        public void processMessage(Chat chat, org.jivesoftware.smack.packet.Message message) {
-                            System.out.println("Received message: "
-                                    + (message != null ? message.getBody() : "NULL"));
-                        }
-                    });
+                    chat.addMessageListener(messageListener);
 
                 }
 
@@ -95,13 +90,18 @@ public class GChatTab implements MessageListener {
 
     }
 
-                    public void sendMessage(String message, int to)  {
+
+
+
+
+    public void sendMessage(String message, int to)  {
                         System.out.println("Message is ......." + message + "to" + to);
                         String userId = userList.get(to);
 
-                        chat = connection.getChatManager().createChat(userId, new MySmackDemo());
+
+
                         try {
-                            chatManager.createChat(userId, new MySmackDemo());
+                            chat = chatManager.createChat(userId, messageListener);
 
                             chat.sendMessage(message);
                         } catch (XMPPException e) {
@@ -153,8 +153,5 @@ public class GChatTab implements MessageListener {
 
                         }
 
-                    public void processMessage(Chat chat, org.jivesoftware.smack.packet.Message message) {
-                        if (message.getType() == org.jivesoftware.smack.packet.Message.Type.chat)
-                            Main.GchatText.appendText(message.getBody());
-                    }
+
                 }

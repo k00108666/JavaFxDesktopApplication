@@ -49,6 +49,7 @@ public class Main extends Application {
     public static  int currentChat;
     public static int gChatrecipient;
     GChatTab gchat = new GChatTab();
+    Boolean connected = false;
 
 
 
@@ -119,6 +120,8 @@ public class Main extends Application {
 
                    }
 
+                   connected = true;
+
                     GMailButton.setVisible(false);
                     GMailLabel.setVisible(false);
                     GMailLabelPass.setVisible(false);
@@ -126,6 +129,10 @@ public class Main extends Application {
                     GMailTxtField.setVisible(false);
                     LblEmailNum.setVisible(false);
                     TxtEmailNum.setVisible(false);
+                    inputArea.setEditable(true);
+
+
+
 
 
 
@@ -170,12 +177,13 @@ public class Main extends Application {
         inputArea.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(final KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
+
+                if (keyEvent.getCode() == KeyCode.ENTER && connected == true) {
 
 
                     if (inputArea.getText() != null) {
                         try {
-                            chatArea.appendText(inputArea.getText());
+                            chatArea.appendText(username + ":\n" + inputArea.getText());
                             gchat.sendMessage(inputArea.getText(), gChatrecipient);
                             inputArea.setText("");
 
