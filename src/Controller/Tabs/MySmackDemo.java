@@ -12,8 +12,8 @@ import java.util.Collection;
 
 public class MySmackDemo implements MessageListener {
 
-    public static String username="";
-    public static String password="";
+    public static String username="seamo123@gmail.com";
+    public static String password="01063504983";
     public static String id="";
     static ConnectionConfiguration config;
     XMPPConnection conn;
@@ -39,7 +39,8 @@ public class MySmackDemo implements MessageListener {
 
         try {
 
-            mySmackObj.sendMessage("hello from smack", "nialloc9@gmail.com");
+            mySmackObj.sendMessage("hello from smack", "seamo123test@gmail.com");
+            System.out.println("trying to send message");
         }
         catch(Exception e){
             System.out.println("sending failed");
@@ -76,6 +77,7 @@ public class MySmackDemo implements MessageListener {
     {
         System.out.println("Message is ......."+message);
         Chat chat = connection.getChatManager().createChat(to, new MySmackDemo());
+        chat.sendMessage(message);
 
         System.out.println("Chat obj is ........"+ chat);
     }
@@ -91,6 +93,7 @@ public class MySmackDemo implements MessageListener {
         System.out.println("\n\n" + entries.size() + " buddy(ies):");
         for(RosterEntry r:entries)
         {
+
             System.out.println(r.getUser());
             System.out.println(r.getName());
             try {

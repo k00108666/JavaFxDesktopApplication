@@ -19,7 +19,7 @@ public class SendTest {
 
     public static class MessageParrot implements MessageListener {
 
-        private Message msg = new Message("nialloc9@gmail.com" , Message.Type.chat);
+        private Message msg = new Message("seamo123@gmail.com" , Message.Type.chat);
 
         // gtalk seems to refuse non-chat messages
         // messages without bodies seem to be caused by things like typing
@@ -35,6 +35,7 @@ public class SendTest {
                 }
             } else {
                 System.out.println("I got a message I didn''t understand");
+
             }
         }
     }
@@ -57,7 +58,7 @@ public class SendTest {
             System.exit(1);
         }
         try {
-            connection.login("", "");
+            connection.login("seamo123test@gmail.com", "01063504983");
             System.out.println("Logged in as " + connection.getUser());
 
             Presence presence = new Presence(Presence.Type.available);
@@ -70,11 +71,11 @@ public class SendTest {
         }
 
         ChatManager chatmanager = connection.getChatManager();
-        Chat chat = chatmanager.createChat("nialloc9@gmail.com", new MessageParrot());
+        Chat chat = chatmanager.createChat("seamo123@gmail.com", new MessageParrot());
 
         try {
             // google bounces back the default message types, you must use chat
-            Message msg = new Message("nialloc9@gmail.com", Message.Type.chat);
+            Message msg = new Message("seamo123@gmail.com", Message.Type.chat);
             msg.setBody("Test");
             chat.sendMessage(msg);
         } catch (XMPPException e) {

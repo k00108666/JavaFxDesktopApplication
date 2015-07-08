@@ -2,6 +2,7 @@ package application;
 
 
 import Controller.GeneralControls.AlertBox;
+import Controller.Tabs.GChatTab;
 import Controller.Tabs.GmailTab;
 import Controller.Tabs.MySmackDemo;
 import javafx.application.Application;
@@ -12,9 +13,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.jivesoftware.smack.XMPPException;
+
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 public class Main extends Application {
 
@@ -27,7 +33,9 @@ public class Main extends Application {
     application.Email email = new application.Email();
 
 
+
     public ListView GmailListView;
+    public static ComboBox buddyList;
     Button GMailButton;
     Label GMailLabel;
     Label GMailLabelPass;
@@ -35,7 +43,13 @@ public class Main extends Application {
     TextField GMailTxtField;
     TextField TxtEmailNum;
     Label LblEmailNum;
-    TextArea GchatText;
+    public static TextArea GchatText;
+    TextArea chatArea;
+    TextArea inputArea;
+    public static  int currentChat;
+    public static int gChatrecipient;
+    GChatTab gchat = new GChatTab();
+
 
 
 
@@ -54,6 +68,11 @@ public class Main extends Application {
         TxtEmailNum = (TextField)  root.lookup("#txtEmailNum");
         LblEmailNum = (Label) root.lookup("#lblEmailNum");
         GchatText = (TextArea) root.lookup("#txtAreaGchat");
+
+
+        buddyList = (ComboBox) root.lookup("#cmbGchat");
+        inputArea = (TextArea) root.lookup("#textAreaGchatInput");
+        chatArea = (TextArea) root.lookup("#txtAreaGchat");
 
 
 
@@ -75,19 +94,6 @@ public class Main extends Application {
 
 
 
-
-
-        GchatText.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-                MySmackDemo smack = new MySmackDemo();
-
-            }
-        });
-
-
-
         GMailButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -103,10 +109,14 @@ public class Main extends Application {
 
                    GmailListView.setDisable(false);
 
+                   gchat.connectTOGTalk();
+                    gchat.displayBuddyList();
+
                    //Add each email address to a new line in the list
                    for (int x = 0; x < dm.getSize(); x++) {
 
                        GmailListView.getItems().add(dm.get(x));
+
                    }
 
                     GMailButton.setVisible(false);
@@ -148,9 +158,52 @@ public class Main extends Application {
             }
         });
 
+
+
+        buddyList.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                 getUserId();
+            }});
+
+
+
+        inputArea.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(final KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+
+
+                    if (inputArea.getText() != null) {
+                        try {
+                            chatArea.appendText(inputArea.getText());
+                            gchat.sendMessage(inputArea.getText(), gChatrecipient);
+                            inputArea.setText("");
+
+                        } catch (Exception e) {
+                            AlertBox alert = new AlertBox();
+                            alert.display("Error sending message", "Please make sure there is a message to send");
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+    }
+
+
+    public static void  getUserId(){
+
+
+        currentChat =  buddyList.getSelectionModel().getSelectedIndex();
+        gChatrecipient = currentChat;
+
+
+
+
     }
 
 
