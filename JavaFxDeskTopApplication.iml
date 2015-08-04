@@ -89,5 +89,16 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../Programming/API's/restfb-1.13.0/restfb-1.13.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../Programming/API's/restfb-1.13.0/restfb-1.13.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

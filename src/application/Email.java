@@ -1,13 +1,8 @@
 package application;
 
 import Controller.GeneralControls.EmailControls;
-import Controller.GeneralControls.WindowControls;
-import Controller.Tabs.GmailTab;
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import Controller.Tabs.GmailTab.GmailTab;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.Cursor;
@@ -18,12 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebView;
-
-import javax.mail.MessagingException;
-import javax.rmi.CORBA.ValueHandler;
-import java.awt.*;
-import java.io.IOException;
 
 /**
  * Created by Seamy on 6/26/2015.

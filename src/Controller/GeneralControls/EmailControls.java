@@ -1,6 +1,6 @@
 package Controller.GeneralControls;
 
-import Controller.Tabs.GmailTab;
+import Controller.Tabs.GmailTab.GmailTab;
 import application.Email;
 import application.Main;
 import javafx.stage.FileChooser;
@@ -16,7 +16,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -43,6 +43,9 @@ public class EmailControls {
         public  Multipart multipart;
 
         String result;
+
+
+
 
 
 
@@ -285,6 +288,8 @@ public class EmailControls {
 
 
     }
+
+
 
 
 }

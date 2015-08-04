@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="emailViewPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
-
-    <children>
-      <TabPane layoutX="14.0" layoutY="7.0" prefHeight="486.0" prefWidth="266.0" tabClosingPolicy="UNAVAILABLE">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="gmailTab" text="GMail">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab fx:id="gmailTab" text="GMail">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ListView fx:id="GmailListView" disable="true" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <PasswordField fx:id="passPassword" layoutX="108.0" layoutY="76.0" prefHeight="31.0" prefWidth="144.0" promptText="*************" />
@@ -24,21 +24,17 @@
                         <Label fx:id="lblEmailNum" layoutX="9.0" layoutY="123.0" text="Email Num:" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="facebookTab" text="FaceBook Feed">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ListView fx:id="FaceBookListView" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
-      <TabPane layoutX="634.0" layoutY="7.0" prefHeight="486.0" prefWidth="266.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
+   </left>
+   <center>
+      <TabPane fx:id="webTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
             <Tab fx:id="gChatTab" text="GChat">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -50,16 +46,10 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="facebookTab1" text="FaceBook Feed">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ListView fx:id="FaceBookListView1" prefHeight="447.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
+        </tabs>
       </TabPane>
-   </children>
-</AnchorPane>
+   </right>
+   <top>
+      <TextField fx:id="txtWebAdress" promptText="Where would you like to go??? :)" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

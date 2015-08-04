@@ -2,25 +2,34 @@ package application;
 
 
 import Controller.GeneralControls.AlertBox;
-import Controller.Tabs.GChatTab;
-import Controller.Tabs.GmailTab;
-import Controller.Tabs.MySmackDemo;
+import Controller.Tabs.GmailTab.GChatTab;
+import Controller.Tabs.GmailTab.GmailTab;
+import Controller.WebViewControls.WebViewControls;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.jivesoftware.smack.XMPPException;
 
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicComboBoxUI;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
 
@@ -29,7 +38,7 @@ public class Main extends Application {
     public static String replyName = " ";
     public static String username = " ";
     public static String password = " ";
-    Controller.Tabs.GmailTab gmail = new Controller.Tabs.GmailTab();
+    GmailTab gmail = new GmailTab();
     application.Email email = new application.Email();
 
 
@@ -46,11 +55,15 @@ public class Main extends Application {
     public static TextArea GchatText;
     TextArea chatArea;
     TextArea inputArea;
+    TextField webAddress;
+    public static TabPane webViewTab;
     public static  int currentChat;
     public static int gChatrecipient;
     GChatTab gchat = new GChatTab();
+    WebViewControls webview = new WebViewControls();
     Boolean connected = false;
-
+    public  static Parent root;
+    public static String homePage = "http://www.google.com";
 
 
 
@@ -59,7 +72,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //Load FXML and lookup the Email List
-        Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
+
+        root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
         GmailListView = (ListView) root.lookup("#GmailListView");
         GMailButton = (Button)  root.lookup("#btnGMailLogin");
         GMailLabel = (Label) root.lookup("#lblUser");
@@ -69,11 +83,18 @@ public class Main extends Application {
         TxtEmailNum = (TextField)  root.lookup("#txtEmailNum");
         LblEmailNum = (Label) root.lookup("#lblEmailNum");
         GchatText = (TextArea) root.lookup("#txtAreaGchat");
+        webViewTab = (TabPane) root.lookup("#webTabPane");
 
 
         buddyList = (ComboBox) root.lookup("#cmbGchat");
         inputArea = (TextArea) root.lookup("#textAreaGchatInput");
         chatArea = (TextArea) root.lookup("#txtAreaGchat");
+        webAddress = (TextField) root.lookup("#txtWebAdress");
+
+
+
+
+        webview.loadPage(homePage);
 
 
 
@@ -82,13 +103,27 @@ public class Main extends Application {
         TxtEmailNum.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               try{ GmailTab.numOfEmails = Integer.parseInt(TxtEmailNum.getText());}
-               catch (Exception ex)  {
+                try {
+                    GmailTab.numOfEmails = Integer.parseInt(TxtEmailNum.getText());
+                } catch (Exception ex) {
 
-                   AlertBox.display("Error", "Value must be an Integer");
-                   TxtEmailNum.setText("10");
+                    AlertBox.display("Error", "Value must be an Integer");
+                    TxtEmailNum.setText("10");
 
-               }
+                }
+
+            }
+        });
+
+        webAddress.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+
+                if (event.getCode() == KeyCode.ENTER && connected == true) {
+
+
+
+                }
 
             }
         });
@@ -99,28 +134,29 @@ public class Main extends Application {
             @Override
             public void handle(MouseEvent event) {
 
-               try {
-                   username = GMailTxtField.getText();
-                   password = GMailPass.getText();
+                try {
+                    username = GMailTxtField.getText();
+                    password = GMailPass.getText();
 
 
-                   //Connect to gmail and get email addresses
-                   gmail.doConnect();
-                   DefaultListModel dm = gmail.getAddresses();
+                    //Connect to gmail and get email addresses
+                    gmail.doConnect();
+                    DefaultListModel dm = gmail.getAddresses();
 
-                   GmailListView.setDisable(false);
+                    GmailListView.setDisable(false);
 
-                   gchat.connectTOGTalk();
-                    gchat.displayBuddyList();
+                    gchat.connectTOGTalk();
 
-                   //Add each email address to a new line in the list
-                   for (int x = 0; x < dm.getSize(); x++) {
+                    //gchat.displayBuddyList();
 
-                       GmailListView.getItems().add(dm.get(x));
+                    //Add each email address to a new line in the list
+                    for (int x = 0; x < dm.getSize(); x++) {
 
-                   }
+                        GmailListView.getItems().add(dm.get(x));
 
-                   connected = true;
+                    }
+
+                    connected = true;
 
                     GMailButton.setVisible(false);
                     GMailLabel.setVisible(false);
@@ -131,20 +167,22 @@ public class Main extends Application {
                     TxtEmailNum.setVisible(false);
                     inputArea.setEditable(true);
 
+                    ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+                    checkForMail check = new checkForMail();
+
+
+                    exec.scheduleAtFixedRate(check.check, 10, 10, TimeUnit.SECONDS);
 
 
 
 
+                } catch (Exception ex) {
 
 
-
-               } catch (Exception ex) {
-
-
-                   AlertBox.display("Could not connect to GMail", "Possible reasons: 1. Incorrect Email 2. Incorrect Password 3.No internet Connection 4. IMap or SMTP settings not enabled on GMail etc");
+                    AlertBox.display("Could not connect to GMail", "Possible reasons: 1. Incorrect Email 2. Incorrect Password 3.No internet Connection 4. IMap or SMTP settings not enabled on GMail etc");
 
 
-               }
+                }
 
             }
         });
@@ -168,9 +206,11 @@ public class Main extends Application {
 
 
         buddyList.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue ov, String t, String t1) {
-                 getUserId();
-            }});
+            @Override
+            public void changed(ObservableValue ov, String t, String t1) {
+                getUserId();
+            }
+        });
 
 
 
@@ -197,9 +237,23 @@ public class Main extends Application {
             }
         });
 
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+
+
+        primaryStage.setX(0);
+        primaryStage.setY(0);
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
+
+
+
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
     }
 
 
@@ -216,8 +270,41 @@ public class Main extends Application {
 
 
 
+
+
+    public  class checkForMail  {
+
+
+
+
+        final Runnable check = new Runnable() {
+            public void run()  {
+
+
+                DefaultListModel dm = gmail.getAddresses();
+                GmailListView.getItems().clear();
+
+
+
+                for (int x = 0; x < dm.getSize(); x++) {
+
+                    GmailListView.getItems().add(dm.get(x));
+
+                   }
+
+
+
+                }
+
+
+    };
+    }
+
+
+
     public static void main(String[] args) {
         launch(args);
+
 
 
     }
